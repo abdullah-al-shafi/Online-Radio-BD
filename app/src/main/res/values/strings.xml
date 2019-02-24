@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Online Radio</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="no_stream">Radio station couldn\'t stream!</string>
+    <string name="live_broadcast">On Air</string>
+</resources>
