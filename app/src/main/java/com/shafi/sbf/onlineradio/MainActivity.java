@@ -1,6 +1,7 @@
 package com.shafi.sbf.onlineradio;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     List<String> chanelName = new ArrayList<>();
     List<String> chanelFrequency = new ArrayList<>();
     List<String> chanelUrl = new ArrayList<>();
+    List<String> chanelImage = new ArrayList<>();
     List<String> makeStringItem = new ArrayList<>();
 
 
@@ -76,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     RadioManager radioManager;
 
-    String streamURL;
+    String streamURL,Frequency;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,23 @@ public class MainActivity extends AppCompatActivity {
         networkLibraryInitialazer();
 
         getData();
+
+        subPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MediaPlayer.class);
+
+                intent.putStringArrayListExtra("url", (ArrayList<String>) chanelUrl);
+                intent.putStringArrayListExtra("fre", (ArrayList<String>) chanelFrequency);
+                intent.putStringArrayListExtra("image", (ArrayList<String>) chanelImage);
+
+                intent.putExtra("Frequency",Frequency);
+
+                if(!Frequency.isEmpty()){
+                    startActivity(intent);
+                }
+            }
+        });
 
         //    listView.setAdapter(new ShoutcastListAdapter(this, ShoutcastHelper.retrieveShoutcasts(this)));
     }
@@ -137,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             chanelName.add(items.get(i).getName());
             chanelFrequency.add(items.get(i).getApk());
             chanelUrl.add(items.get(i).getUrl());
+            chanelImage.add(items.get(i).getUrl());
         }
 
         recylaerViewAdapter = new RecylaerViewAdapter(items);
@@ -161,7 +182,9 @@ public class MainActivity extends AppCompatActivity {
 
                 streamURL = chanelUrl.get(position);
 
-                radioManager.playOrPause(streamURL);
+                radioManager.playOrPause(streamURL,position);
+
+                Frequency = chanelFrequency.get(position);
 
             }
 
@@ -304,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
 
         radioManager.playOrPause(streamURL);
     }
+
 
 
 

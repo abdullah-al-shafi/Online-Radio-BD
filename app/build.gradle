@@ -41,7 +41,6 @@ dependencies {
     //Image loader Pisco
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-
     // full exoplayer library
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
 

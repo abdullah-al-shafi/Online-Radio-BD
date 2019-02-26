@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.shafi.sbf.onlineradio.comon.Comon;
+
 import org.greenrobot.eventbus.EventBus;
 
 public class RadioManager {
+
+    public static int possition;
 
     private static RadioManager instance = null;
 
@@ -35,7 +39,15 @@ public class RadioManager {
         return service;
     }
 
+    public void playOrPause(String streamUrl,int position){
+
+        Comon.possition = position ;
+
+        service.playOrPause(streamUrl);
+    }
     public void playOrPause(String streamUrl){
+
+
 
         service.playOrPause(streamUrl);
     }
